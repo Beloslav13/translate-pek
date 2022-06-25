@@ -96,9 +96,10 @@ def translate_html(contents: List[AnyStr], data_translate: dict) -> BeautifulSou
     """
     for original_translate, out_translate in data_translate.items():
         for i, content in enumerate(contents):
-            ts = original_translate.replace("(", "\\(").replace(")", "\\)").replace("?", "\?").replace(".", "\.")
-            if re.findall(ts, content):
-                res = re.sub(ts, out_translate, content)
+            # todo: поправить треш
+            r_orig_trans = original_translate.replace("(", "\\(").replace(")", "\\)").replace("?", "\?").replace(".", "\.")
+            if re.findall(r_orig_trans, content):
+                res = re.sub(r_orig_trans, out_translate, content)
                 contents.insert(i, res)
                 contents.remove(content)
     soup = BeautifulSoup("".join(contents), "html.parser")
